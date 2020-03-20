@@ -1,0 +1,51 @@
+version: "3"
+services:
+  selenium-hub:
+    image: selenium/hub:3.141.59-radium
+    container_name: selenium-hub
+    ports:
+      - "4444:4444"
+    environment:
+      - GRID_NEW_SESSION_WAIT_TIMEOUT=6000
+      - GRID_CLEAN_UP_CYCLE=120
+      - GRID_BROWSER_TIMEOUT=120
+      - GRID_TIMEOUT=120
+  chrome_1:
+    image: selenium/node-chrome:3.141.59-radium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_SESSION=6
+      - NODE_MAX_INSTANCES=2
+      - SCREEN_HEIGHT=1020
+      - SCREEN_WIDTH=1360
+  chrome_2:
+    image: selenium/node-chrome:3.141.59-radium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_SESSION=6
+      - NODE_MAX_INSTANCES=2
+      - SCREEN_HEIGHT=1020
+      - SCREEN_WIDTH=1360
+  chrome_3:
+    image: selenium/node-chrome:3.141.59-radium
+    volumes:
+      - /dev/shm:/dev/shm
+    depends_on:
+      - selenium-hub
+    environment:
+      - HUB_HOST=selenium-hub
+      - HUB_PORT=4444
+      - NODE_MAX_SESSION=6
+      - NODE_MAX_INSTANCES=2
+      - SCREEN_HEIGHT=1020
+      - SCREEN_WIDTH=1360

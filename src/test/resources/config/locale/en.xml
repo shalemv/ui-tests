@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+  <comment>English text translation</comment>
+  <entry key="PAYMENT">Payment</entry>
+  <entry key="PAY_BY_CARD">Pay by card</entry>
+  <entry key="CARD_NUMBER">Card Number</entry>
+  <entry key="EXPIRY_MONTH">Expiry Month</entry>
+  <entry key="EXPIRY_YEAR">Expiry Year</entry>
+  <entry key="CVV">Security Code</entry>
+  <entry key="CARD_HOLDER_NAME">Name on card</entry>
+  <entry key="TOTAL">Total</entry>
+  <entry key="ORDER_SUMMARY">Order summary</entry>
+  <entry key="PAY_NOW">Pay now</entry>
+  <entry key="PAYMENT_DECLINED">Payment declined</entry>
+  <entry key="PAYMENT_DECLINED_MESSAGE">Sorry, your payment has not been accepted - please try again.</entry>
+  <entry key="MERCHANT_REDIRECT">Return to basket</entry>
+  <entry key="PAYMENT_ACCEPTED">Payment accepted</entry>
+  <entry key="PAYMENT_ACCEPTED_MESSAGE">Thank you, your payment has been accepted.</entry>
+  <entry key="REFERENCE">Reference number</entry>
+</properties>

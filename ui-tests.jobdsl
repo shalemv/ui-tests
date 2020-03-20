@@ -1,0 +1,56 @@
+def subscriptionName = System.getenv("CLUSTER_NAME")
+
+folder('e2e-tests') {
+    displayName('e2e-tests')
+    description('Folder for all end to end tests')
+}
+
+pipelineJob("e2e-tests/ui-tests") {
+    logRotator {
+        daysToKeep(14)
+        artifactNumToKeep(3)
+    }
+    throttleConcurrentBuilds {
+            maxTotal(1)
+        }
+
+    definition {
+        cpsScm {
+            scm {
+                git {
+                    remote {
+                        github('gitRepo', 'ssh', 'bitbucket.org')
+                    }
+                    branch('master')
+                }
+            }
+            scriptPath('Jenkinsfile')
+        }
+    }
+}
+
+
+    folder('e2e-tests/base-image') {
+        displayName('base-image')
+        description('Folder for all test base images')
+
+    pipelineJob("e2e-tests/base-image/ui-tests") {
+        logRotator {
+            daysToKeep(14)
+            artifactNumToKeep(3)
+        }
+        definition {
+            cpsScm {
+                scm {
+                    git {
+                        remote {
+                            github('gitRepo', 'ssh', 'bitbucket.org')
+                        }
+                        branch('master')
+                    }
+                }
+                scriptPath('Jenkinsfile.deps')
+            }
+        }
+    }
+}

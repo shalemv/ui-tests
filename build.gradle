@@ -1,0 +1,47 @@
+plugins {
+    id 'java'
+}
+
+group 'ui-tests'
+version '1.0-SNAPSHOT'
+
+sourceCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile group: 'org.glassfish.jersey.core', name: 'jersey-client', version:'2.27'
+    testCompile group: 'org.glassfish', name: 'javax.json', version:'1.1.2'
+    testCompile group: 'org.glassfish.jersey.inject', name: 'jersey-hk2', version:'2.27'
+    testCompile group: 'com.jayway.jsonpath', name: 'json-path-assert', version:'2.4.0'
+    testCompile group: 'com.google.inject', name: 'guice', version:'4.2.0'
+    testCompile group: 'junit', name: 'junit', version:'4.12'
+    testCompile group: 'io.cucumber', name: 'cucumber-java8', version: '4.3.0'
+    testCompile group: 'io.cucumber', name: 'cucumber-junit', version: '4.3.0'
+    testCompile group: 'info.cukes', name: 'cucumber-guice', version: '1.2.5'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version:'1.3'
+    testCompile group: 'org.seleniumhq.selenium', name: 'selenium-java', version:'3.11.0'
+    testCompile group: 'uk.sponte.automation', name: 'selenium-pom', version:'3.0.14'
+    testCompile group: 'uk.sponte.automation', name: 'selenium-pom-guice', version:'3.0.14'
+    testCompile group: 'org.reflections', name: 'reflections', version:'0.9.11'
+    testCompile group: 'org.slf4j', name: 'slf4j-log4j12', version: '1.7.25'
+    testCompile group: 'io.appium', name: 'java-client', version: '5.0.4'
+    testCompile group: 'ch.qos.logback', name: 'logback-classic', version: '1.+'
+    testCompile group: 'io.github.prashant-ramcharan', name:'courgette-jvm', version: '3.3.0'
+    testCompile group: 'io.github.bonigarcia', name: 'webdrivermanager', version: '3.8.1'
+}
+
+task uiSuite(type: Test) {
+    include '**/TestSuite.class'
+    outputs.upToDateWhen { false }
+}
+
+tasks.withType(Test) {
+    systemProperties = System.getProperties()
+    systemProperties.remove("java.endorsed.dirs")
+    testLogging.showStandardStreams = true
+    systemProperty "cucumber.options", System.getProperty("cucumber.options")
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 2
+}

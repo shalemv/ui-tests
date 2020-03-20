@@ -1,0 +1,17 @@
+FROM openjdk:8u181-jdk
+
+RUN \
+    apt-get update \
+    && apt-get -y install git \
+    && apt-get clean \
+    && apt-get autoremove
+
+ENV GRADLE_USER_HOME /var/gradle
+
+RUN mkdir $GRADLE_USER_HOME
+
+WORKDIR /opt/app
+
+COPY . .
+
+RUN ENV=${ENV} ./gradlew uiSuite -Dcucumber.tags="@none"; exit 0
